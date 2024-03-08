@@ -1,4 +1,6 @@
 # Title
+print("Stock Data Visualizer")
+print("---------------------")
 
 # Main While Loop
 
