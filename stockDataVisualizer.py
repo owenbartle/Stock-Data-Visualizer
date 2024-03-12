@@ -34,7 +34,25 @@ while (loop == True):
             print("Must choose a valid type (1. Bar Graph | 2. Line Graph)")
 
     # Select Time Series Type - Incomplete
-
+    print("Select the Time Series of the chart you want to Generate:")
+    print("----------------------------")
+    print("1. Intraday")
+    print("2. Daily")
+    print("3. Weekly")
+    print("4. Monthly\n")
+    bool = True
+    while(bool):
+        tsChoice = input("Enter time series option (1, 2, 3, 4): ")
+        try:
+            tsChoice = int(tsChoice)
+            if(tsChoice == 1 or tsChoice == 2 or tsChoice == 3 or tsChoice == 4):
+                bool = False
+            else:
+                raise Exception("Not a valid choice. Enter only a '1', '2', '3', or '4', Exception")
+        except:
+            print("Not a valid choice. Enter only a '1', '2', '3', or '4'.", Exception)
+       
+        
     # Select Start Date - Complete
     # Select End Date - Complete
     while (True):
