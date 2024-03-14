@@ -178,7 +178,7 @@ while (loop == True):
 
     # Find another stock - Complete
     while(True):
-        visualizeAnother = input("Would you like to view more stock data? Press 'y' to continue any key to exit: ")
+        visualizeAnother = input("Would you like to view more stock data? Press 'y' to continue, or any key to exit: ")
         if (visualizeAnother == 'y'):
             break
         else:
