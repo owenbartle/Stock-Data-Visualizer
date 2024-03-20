@@ -19,7 +19,6 @@ def fetch_intraday_data(symbol, api_key, tsString, interval):
     data = r.json()
     return data
 
-    
 
 # Title
 print("Stock Data Visualizer")
@@ -30,6 +29,17 @@ loop = True
 while (loop == True):
     # Get Stock Option - Complete
     symbol = input("Enter the stock symbol to search for: ")
+    def check_stock(symbol):
+
+        response = requests.get(url='https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + symbol + '&interval=5min&apikey=JLFXYX4J4I20CF8E')
+        data = response.json()
+
+        if 'Error Message' in data:
+            print("It does not seem that this ticker symbol points to an existing stock. Please try again")
+        else: 
+            print('The ticker symbol ' + symbol + ' is valid')
+            print(data)
+            return symbol
     
     # Select Chart Type - Complete
     print("\nChart Types:\n---------------------\n\t1. Bar\n\t2. Line")
@@ -72,7 +82,7 @@ while (loop == True):
                 continue
             tsString = "TIME_SERIES_INTRADAY"
             stockData = fetch_intraday_data(symbol, api_key, tsString, interval)
-            timeSeriesKey = {1: f"Time Series {interval}"}
+            timeSeriesKey = {1: f"Time Series ({interval})"}
             break        
         elif(tsChoice == '2'):
             tsString = "TIME_SERIES_DAILY"
@@ -93,6 +103,8 @@ while (loop == True):
             print("Invalid choice. Must enter 1. (Intraday), 2. (Daily) 3. (Weekly) 4. (Monthly)")
             continue
        
+       
+    #Time Series Keys
         
     # Select Start Date - Complete
     # Select End Date - Complete
@@ -110,21 +122,6 @@ while (loop == True):
             print("Must input a valid date format. Ex: (YYYY-MM-DD)")
             
     
-    
-    ##change user choices to api parameters
-    ##variables tsString for time series option,
-    
-    ##url now queries our api using our key, searching for ouyr given symbol, and using our time series option
-    
-    ##this is just so we can check to see if our program will develop the correct url for querying the api
-    
-    # Generate Graph and Open in Users Default Browser - COMPLETE (thank the lord)
-    
-    #Data keys using a python dictionary to define
-    #Time Series (interval)
-    #Time Series (Daily)
-    #Weekly Time Series
-    #Monthly Time Series
     
     if stockData:
         if (chartType == 1):
