@@ -29,18 +29,27 @@ loop = True
 while (loop == True):
     # Get Stock Option - Complete
     symbol = input("Enter the stock symbol to search for: ")
+
+    #Function that checks stock ticker validity
     def check_stock(symbol):
 
         response = requests.get(url='https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + symbol + '&interval=5min&apikey=JLFXYX4J4I20CF8E')
         data = response.json()
 
         if 'Error Message' in data:
-            print("It does not seem that this ticker symbol points to an existing stock. Please try again")
+            return False
         else: 
-            print('The ticker symbol ' + symbol + ' is valid')
-            print(data)
-            return symbol
+            return True
     
+    #Check that the given stock ticker is valid
+    if check_stock(symbol) == False:
+        print("It does not seem that this ticker symbol points to an existing stock. Please try again")
+        loop = True
+        continue
+    else:
+        print('The ticker symbol ' + symbol + ' is valid')
+
+
     # Select Chart Type - Complete
     print("\nChart Types:\n---------------------\n\t1. Bar\n\t2. Line")
     while (True):
