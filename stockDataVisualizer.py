@@ -140,7 +140,7 @@ while (loop == True):
                 lowPrices.append(float(data['3. low']))
                 closePrices.append(float(data['4. close']))
                 
-            barChart.x_labels = dates
+            barChart.x_labels = map(str, dates)
             barChart.add('Opening Prices', openPrices)
             barChart.add('High Prices', highPrices)
             barChart.add('Low Prices', lowPrices)
@@ -152,14 +152,15 @@ while (loop == True):
             lineChart.title = f'Line Chart for {symbol} between {startDate} and {endDate}'
             
             
-            dates = []
-            openPrices = []
-            highPrices = []
-            lowPrices = []
-            closePrices = []
-            for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
+            dates = [] # intizalize dates list to use for x axis
+            openPrices = [] # initialize open prices list to hold values for graph
+            highPrices = [] # initialize high prices list to store values for graph 
+            lowPrices = [] # initialize low prices list to store values for graph
+            closePrices = [] # initialize close prices list to store values for graph
+            
+            for date, data in stockData[timeSeriesKey[int(tsChoice)]].items(): 
                 dates.append(date)
-                openPrices.append(float(data['1. open']))
+                openPrices.append(float(data['1. open'])) 
                 highPrices.append(float(data['2. high']))
                 lowPrices.append(float(data['3. low']))
                 closePrices.append(float(data['4. close']))
