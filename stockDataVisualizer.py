@@ -24,6 +24,8 @@ def fetch_intraday_data(symbol, api_key, tsString, interval):
 print("Stock Data Visualizer")
 print("-------------------------\n")
 
+
+
 # Main While Loop
 loop = True
 while (loop == True):
@@ -33,7 +35,7 @@ while (loop == True):
     #Function that checks stock ticker validity
     def check_stock(symbol):
 
-        response = requests.get(url='https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + symbol + '&interval=5min&apikey=JLFXYX4J4I20CF8E')
+        response = requests.get(url='https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + symbol + '&interval=5min&apikey=' + api_key)
         data = response.json()
 
         if 'Error Message' in data:
