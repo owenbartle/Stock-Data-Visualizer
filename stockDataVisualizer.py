@@ -168,12 +168,22 @@ while (loop == True):
             highPrices = []
             lowPrices = []
             closePrices = []
+
+            # This might fix it I think. Needs more testing
             for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
-                dates.append(date)
-                openPrices.append(float(data['1. open']))
-                highPrices.append(float(data['2. high']))
-                lowPrices.append(float(data['3. low']))
-                closePrices.append(float(data['4. close']))
+                if parsedStartDate <= datetime.strptime(date, "%Y-%m-%d") <= parsedEndDate:
+                    dates.append(date)
+                    openPrices.append(float(data['1. open']))
+                    highPrices.append(float(data['2. high']))
+                    lowPrices.append(float(data['3. low']))
+                    closePrices.append(float(data['4. close']))
+
+            # for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
+            #     dates.append(date)
+            #     openPrices.append(float(data['1. open']))
+            #     highPrices.append(float(data['2. high']))
+            #     lowPrices.append(float(data['3. low']))
+            #     closePrices.append(float(data['4. close']))
                 
             lineChart.x_labels = dates
             lineChart.add('Opening Prices', openPrices)
