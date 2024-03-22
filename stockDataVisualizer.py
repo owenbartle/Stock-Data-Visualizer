@@ -142,6 +142,7 @@ while (loop == True):
             highPrices = []
             lowPrices = []
             closePrices = []
+            
             for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
                 dates.append(date)
                 openPrices.append(float(data['1. open']))
@@ -174,7 +175,7 @@ while (loop == True):
                 lowPrices.append(float(data['3. low']))
                 closePrices.append(float(data['4. close']))
                 
-            lineChart.x_labels = dates
+            lineChart.x_labels = map(str, dates)
             lineChart.add('Opening Prices', openPrices)
             lineChart.add('High Prices', highPrices)
             lineChart.add('Low Prices', lowPrices)
