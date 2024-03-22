@@ -139,17 +139,28 @@ while (loop == True):
             barChart = pygal.Bar()
             barChart.title = f'Bar Char for {symbol} between {startDate} and {endDate}'
             
+            ##same fix for 
             dates = []
             openPrices = []
             highPrices = []
             lowPrices = []
             closePrices = []
+            
             for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
-                dates.append(date)
-                openPrices.append(float(data['1. open']))
-                highPrices.append(float(data['2. high']))
-                lowPrices.append(float(data['3. low']))
-                closePrices.append(float(data['4. close']))
+                if parsedStartDate <= datetime.strptime(date, "%Y-%m-%d") <= parsedEndDate:
+                    dates.append(date)
+                    openPrices.append(float(data['1. open']))
+                    highPrices.append(float(data['2. high']))
+                    lowPrices.append(float(data['3. low']))
+                    closePrices.append(float(data['4. close']))
+
+          
+            ##for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
+             ##   dates.append(date)
+              ##  openPrices.append(float(data['1. open']))
+               ## highPrices.append(float(data['2. high']))
+                ##lowPrices.append(float(data['3. low']))
+                ##closePrices.append(float(data['4. close']))
                 
             barChart.x_labels = dates
             barChart.add('Opening Prices', openPrices)
