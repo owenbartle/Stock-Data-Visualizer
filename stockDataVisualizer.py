@@ -3,6 +3,12 @@ import pygal
 from datetime import datetime
 import requests
 
+# Imports of helper files
+import user_input
+
+#Instantiate helper classes
+usrs = user_input.UserInputs
+
 #add api key
 api_key = 'JLFXYX4J4I20CF8E'
 
@@ -52,15 +58,18 @@ while (loop == True):
         print('The ticker symbol ' + symbol + ' is valid')
 
 
+    chartType = usrs.selectChartType()
+
     # Select Chart Type - Complete
-    print("\nChart Types:\n---------------------\n\t1. Bar\n\t2. Line")
-    while (True):
-        chartType = input("Enter the type (1, 2): ")
-        if (chartType == '1' or chartType == '2'):
-            chartType = int(chartType)
-            break
-        else:
-            print("Must choose a valid type (1. Bar Graph | 2. Line Graph)")
+    # print("\nChart Types:\n---------------------\n\t1. Bar\n\t2. Line")
+    # while (True):
+    #     chartType = input("Enter the type (1, 2): ")
+    #     if (chartType == '1' or chartType == '2'):
+    #         chartType = int(chartType)
+    #         break
+    #     else:
+    #         print("Must choose a valid type (1. Bar Graph | 2. Line Graph)")
+
 
     # Select Time Series Type - Complete
     print("Select the Time Series of the chart you want to Generate:")
