@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Flask App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data Visualizer</title>
 </head>
 <body>
-    <h1>Welcome to My Flask App</h1>
+    <h1>Stock Data Visualizer</h1>
+    <form action="{{ url_for('result') }}" method="post">
+        <label for="symbol">Enter stock symbol:</label>
+        <input type="text" id="symbol" name="symbol"><br><br>
+        <!-- Add inputs for chart type, time series function, start date, and end date here -->
+        <input type="submit" value="Generate Graph">
+    </form>
 </body>
 </html>
