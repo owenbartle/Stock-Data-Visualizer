@@ -10,7 +10,7 @@ from wtforms import (
 )
 from datetime import date
 from wtforms.fields import DateField
-from wtforms.validators import URL, DataRequired, Email, Equalto, Length
+from wtforms.validators import URL, DataRequired, Email, EqualTo, Length
 
 class Stockform(FlaskForm): 
     """Generate Your Graph."""
