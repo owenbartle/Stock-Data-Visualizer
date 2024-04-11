@@ -1,4 +1,5 @@
 #import all tools
+from flask import Flask
 import pygal
 from datetime import datetime
 
