@@ -1,10 +1,10 @@
 #import all tools
 import pygal
 from datetime import datetime
+from datetime import date
 
 
 #Chart creation class
-
 class ChartMaker():
 
     def chartMaker(stockData, chartType, symbol, startDate, endDate):
@@ -62,3 +62,6 @@ class ChartMaker():
                 lineChart.render_in_browser()
             else:
                 print("Chart type invalid.")
+
+    def convert_date(str_date):
+        return datetime.strptime(str_date, '%Y-%m-%d').date()
