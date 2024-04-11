@@ -2,8 +2,9 @@ from flask import Flask
 from flask import current_app as app
 from flask import redirect, render_template, url_for, request, flash
 
-from .user_input import Stockform
-from .chart_create import ChartMaker
+from user_input import Stockform
+from chart_create import ChartMaker
+from ourAPI import DataFetching
 
 app = Flask(__name__)
 
@@ -30,16 +31,18 @@ def stocks():
                 chart = None
             else: 
                 #Query our api with the form data
-
+                if time_series == 1:
+                    data = DataFetching.fetch_intraday_data(symbol, 'JLFXYX4J4I20CF8E', time_series, '60min')
+                else:
+                    data = DataFetching.fetch_stock_data(symbol, 'JLFXYX4J4I20CF8E', time_series)
                 """Insert API call code"""
 
                 err = None
-
-                chart = "THIS IS WHAT WE WILL ASSIGN OUR FINISHED CHART TO"
+                chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
             
             return render_template("index.html", form=form, template="form-template", err = err, chart = chart)
     
-    return render_template("index.html", form = form, template = "form-template")
+    return render_template("index.html", form = form, template="form-template")
 
 
 if __name__ == '__main__':
