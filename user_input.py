@@ -11,6 +11,19 @@ from wtforms import (
 from datetime import date
 from wtforms.fields import DateField
 from wtforms.validators import URL, DataRequired, Email, EqualTo, Length
+import csv
+
+##holds stock symbols from csv, so program doesnt have to dedicate memory to 
+##getting tickers each time, tickers preloaded into app
+tickers = []
+
+
+with open('symbols.csv', newline='') as symbols:
+    reader = csv.reader(symbols)
+    next(reader)
+    for row in reader:
+        tickers.append(row[0])
+        
 
 class Stockform(FlaskForm): 
     """Generate Your Graph."""
@@ -20,11 +33,10 @@ class Stockform(FlaskForm):
     help us figure out how to populate the field how he wants it to be"""
 
     #This is where we will implement code to populate the symbol field with stock options
+    ##implements tickers array so symbol field can be chosen among the ticker options
     symbol = SelectField("Choose Stock Symboo", [DataRequired()],
-        choices=[
-            ("IBM", "IBM"),
-            ("GOOGL", "GOOGL")
-        ],
+        tickers
+        
     )
 
     chart_type = SelectField("Select Chart Type", [DataRequired()],
