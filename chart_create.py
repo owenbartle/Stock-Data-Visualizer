@@ -6,20 +6,24 @@ from datetime import datetime
 #Chart creation class
 
 class ChartMaker():
+    
+    def convert_date(strDate):
+        return datetime.strptime(strDate, '%Y-%m-%d').date()
 
     def chartMaker(stockData, chartType, symbol, tsChoice, startDate, endDate):
+        
 
         if stockData:
 
             timeSeriesKey = {}
             if tsChoice == 1:
-                timeSeriesKey = {1: f"Time Series ({"60min"})"}
+                timeSeriesKey = {1: f"Time Series ({'60min'})"}
             elif tsChoice == 2: 
                 timeSeriesKey = {2: "Time Series (Daily)"}
             elif tsChoice == 3:
                 timeSeriesKey = {3: "Weekly Time Series"}
             else:
-                timeSeriesKey = {4: "Monthly Time Series"}
+                    timeSeriesKey = {4: "Monthly Time Series"}
 
             if (chartType == 1):
                 barChart = pygal.Bar()
