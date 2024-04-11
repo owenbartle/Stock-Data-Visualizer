@@ -1,15 +1,26 @@
 #import all tools
 import pygal
 from datetime import datetime
-from datetime import date
 
 
 #Chart creation class
+
 class ChartMaker():
 
-    def chartMaker(stockData, chartType, symbol, startDate, endDate):
+    def chartMaker(stockData, chartType, symbol, tsChoice, startDate, endDate):
 
         if stockData:
+
+            timeSeriesKey = {}
+            if tsChoice == 1:
+                timeSeriesKey = {1: f"Time Series ({"60min"})"}
+            elif tsChoice == 2: 
+                timeSeriesKey = {2: "Time Series (Daily)"}
+            elif tsChoice == 3:
+                timeSeriesKey = {3: "Weekly Time Series"}
+            else:
+                timeSeriesKey = {4: "Monthly Time Series"}
+
             if (chartType == 1):
                 barChart = pygal.Bar()
                 barChart.title = f'Bar Char for {symbol} between {startDate} and {endDate}'
@@ -22,12 +33,11 @@ class ChartMaker():
                 closePrices = []
 
                 for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
-                    if parsedStartDate <= datetime.strptime(date, "%Y-%m-%d") <= parsedEndDate:
-                        dates.append(date)
-                        openPrices.append(float(data['1. open']))
-                        highPrices.append(float(data['2. high']))
-                        lowPrices.append(float(data['3. low']))
-                        closePrices.append(float(data['4. close']))
+                    dates.append(date)
+                    openPrices.append(float(data['1. open']))
+                    highPrices.append(float(data['2. high']))
+                    lowPrices.append(float(data['3. low']))
+                    closePrices.append(float(data['4. close']))
 
                 barChart.x_labels = dates
                 barChart.add('Opening Prices', openPrices)
@@ -47,12 +57,11 @@ class ChartMaker():
                 lowPrices = []
                 closePrices = []
                 for date, data in stockData[timeSeriesKey[int(tsChoice)]].items():
-                    if parsedStartDate <= datetime.strptime(date, "%Y-%m-%d") <= parsedEndDate:
-                        dates.append(date)
-                        openPrices.append(float(data['1. open']))
-                        highPrices.append(float(data['2. high']))
-                        lowPrices.append(float(data['3. low']))
-                        closePrices.append(float(data['4. close']))
+                    dates.append(date)
+                    openPrices.append(float(data['1. open']))
+                    highPrices.append(float(data['2. high']))
+                    lowPrices.append(float(data['3. low']))
+                    closePrices.append(float(data['4. close']))
 
                 lineChart.x_labels = dates
                 lineChart.add('Opening Prices', openPrices)
@@ -63,5 +72,3 @@ class ChartMaker():
             else:
                 print("Chart type invalid.")
 
-    def convert_date(str_date):
-        return datetime.strptime(str_date, '%Y-%m-%d').date()
