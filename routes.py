@@ -1,5 +1,10 @@
-
+from flask import flask
+from flask import current_app as app
 from flask import redirect, render_template,url_for, request, flash
+
+from .user_input import Stockform
+from. chart_create import ChartMaker
+
 
 from .forms import StockForm
 from.charts import *
@@ -26,6 +31,8 @@ def stocks():
                 #This is where we need to call the methods from Charts.py file and implement our code
 
                 #This chart variable is passed to index.html to render the returned chart
+
                 chart = "ASSIGN CHART TO THIS VARIABLE"
             return render_template("index.html", form=form, template="form-template", err = err, chart = chart)
+        
         return render_template("index.html", form=form, template="form-template")
