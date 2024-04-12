@@ -42,7 +42,7 @@ class ChartMaker():
 
             print(filtered_data)
 
-            for date, data in stockData.get(time_series, {}).items():
+            for date, data in filtered_data.get(time_series, {}).items():
                 dates.append(date)
                 openPrices.append(float(data['1. open']))
                 highPrices.append(float(data['2. high']))

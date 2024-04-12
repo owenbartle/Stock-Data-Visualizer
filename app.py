@@ -44,8 +44,6 @@ def stocks():
                     data = data_fetcher.fetch_stock_data(symbol, time_series)
                 """Insert API call code"""
 
-                print(data)
-                print("stop")
 
                 err = None
                 chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
