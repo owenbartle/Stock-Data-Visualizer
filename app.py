@@ -7,6 +7,7 @@ from chart_create import ChartMaker
 from ourAPI import DataFetching
 
 data_fetcher = DataFetching()
+chart_maker = ChartMaker()
 
 app = Flask(__name__)
 
@@ -45,8 +46,8 @@ def stocks():
 
                 print(data)
 
-                # err = None
-                # chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
+                err = None
+                chart = chart_maker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
             
             return render_template("stock.html", form=form, template="form-template", err = err, chart = chart)
     
