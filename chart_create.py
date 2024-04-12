@@ -30,28 +30,26 @@ class ChartMaker():
             
             print("Stock Data:", stockData) #print statement to test if data is passed 
 
-            for date, data in stockData.get(time_series, {}).items():
+        for date, data in stockData.get(time_series, {}).items():
+            date_obj = datetime.strptime(date, '%Y-%m-%d').date()
+            print("Processing date:", date_obj)  # Debugging output
+
+            if startDate <= date_obj <= endDate:
                 dates.append(date)
                 openPrices.append(float(data['1. open']))
                 highPrices.append(float(data['2. high']))
                 lowPrices.append(float(data['3. low']))
                 closePrices.append(float(data['4. close']))
+            else:
+                print("Date out of range:", date_obj)  # Debugging output
 
-            if chartType == "1":
-                barChart.x_labels = dates
-                barChart.add('Opening Prices', openPrices)
-                barChart.add('High Prices', highPrices)
-                barChart.add('Low Prices', lowPrices)
-                barChart.add('Closing Prices', closePrices)
-                # return barChart
-                barChart.render_in_browser()
-            elif chartType == "2":
-                lineChart.x_labels = dates
-                lineChart.add('Opening Prices', openPrices)
-                lineChart.add('High Prices', highPrices)
-                lineChart.add('Low Prices', lowPrices)
-                lineChart.add('Closing Prices', closePrices)
-                # return lineChart
-                lineChart.render_in_browser()
+        chart.x_labels = dates
+        chart.add('Opening Prices', openPrices)
+        chart.add('High Prices', highPrices)
+        chart.add('Low Prices', lowPrices)
+        chart.add('Closing Prices', closePrices)
+        return chart.render()
+
+            
 
 
