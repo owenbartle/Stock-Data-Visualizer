@@ -1,0 +1,70 @@
+/* General Style for the Body */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background: lightgray;
+    margin: 0;
+    padding: 0;
+}
+
+/* Form Style */
+.formwrapper {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+}
+
+/* Title Style */
+.title {
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+/* Input Field Spacing */
+.form-field {
+    margin-bottom: 15px;
+}
+
+/* Input Field Labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="date"],
+select,
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+input[type="submit"] {
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color .5s;
+}
+
+input[type="submit"]:hover {
+    background-color: lightblue;
+}
+
+/* Error Messages */
+.errors,
+p {
+    color: red;
+    font-size: 16px;
+}
+
