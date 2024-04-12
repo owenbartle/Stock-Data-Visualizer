@@ -6,6 +6,8 @@ from user_input import Stockform
 from chart_create import ChartMaker
 from ourAPI import DataFetching
 
+data_fetcher = DataFetching()
+
 app = Flask(__name__)
 
 import os
@@ -35,14 +37,16 @@ def stocks():
                 chart = None
             else: 
                 #Query our api with the form data
-                if time_series == 1:
-                    data = DataFetching.fetch_intraday_data(symbol, 'JLFXYX4J4I20CF8E', time_series, '60min')
+                if time_series == "TIME_SERIES_INTRADAY":
+                    data = data_fetcher.fetch_intraday_data(symbol, time_series, '60min')
                 else:
-                    data = DataFetching.fetch_stock_data(symbol, 'JLFXYX4J4I20CF8E', time_series)
+                    data = data_fetcher.fetch_stock_data(symbol, time_series)
                 """Insert API call code"""
 
-                err = None
-                chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
+                print(data)
+
+                # err = None
+                # chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
             
             return render_template("stock.html", form=form, template="form-template", err = err, chart = chart)
     

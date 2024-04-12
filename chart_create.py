@@ -12,8 +12,10 @@ class ChartMaker():
 
     def chartMaker(stockData, chartType, symbol, tsChoice, startDate, endDate):
 
-
         ## code below is for testing for solving current time series error
+
+        print(stockData)
+        print(stockData)
                 
         if stockData:
 

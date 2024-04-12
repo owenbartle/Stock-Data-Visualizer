@@ -2,18 +2,19 @@ import requests
 
 class DataFetching: 
 
-    #add api key
-    api_key = 'JLFXYX4J4I20CF8E'
+    # Add api key
+    api_key = 'WQ7ZBXJ13TX4DPY5'
 
-    #method for fetching stock date - In Progress
-    def fetch_stock_data(symbol, api_key, tsString):
-        url = f"https://www.alphavantage.co/query?function={tsString}&symbol={symbol}&apikey={api_key}"
+    # Method for fetching stock data - In Progress
+    def fetch_stock_data(self, symbol, tsString):
+        url = f"https://www.alphavantage.co/query?function={tsString}&symbol={symbol}&apikey={self.api_key}"
         r = requests.get(url)
         data = r.json()
         return data
 
-    def fetch_intraday_data(symbol, api_key, tsString, interval):
-        url = f"https://www.alphavantage.co/query?function={tsString}&symbol={symbol}&interval={interval}&apikey={api_key}"
+    def fetch_intraday_data(self, symbol, tsString, interval):
+        url = f"https://www.alphavantage.co/query?function={tsString}&symbol={symbol}&interval={interval}&apikey={self.api_key}"
         r = requests.get(url)
         data = r.json()
         return data
+    

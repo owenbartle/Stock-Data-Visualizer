@@ -48,10 +48,15 @@ class Stockform(FlaskForm):
         
     time_series = SelectField("Select Time Series", [DataRequired()],
         choices=[
-            ("1", "1. Intraday"),
-            ("2", "2. Daily"),
-            ("3", "3. Weekly"),
-            ("4", "4. Monthly")
+
+            ("TIME_SERIES_INTRADAY", "1. Intraday"),
+            ("TIME_SERIES_DAILY", "2. Daily"),
+            ("TIME_SERIES_WEEKLY", "3. Weekly"),
+            ("TIME_SERIES_MONTHLY", "4. Monthly")
+            # ("1", "1. Intraday"),
+            # ("2", "2. Daily"),
+            # ("3", "3. Weekly"),
+            # ("4", "4. Monthly")
         ]
     )
 
