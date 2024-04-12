@@ -8,6 +8,10 @@ from ourAPI import DataFetching
 
 app = Flask(__name__)
 
+import os
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
+
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/stocks", methods=['GET', 'POST'])
 def stocks():
