@@ -42,14 +42,14 @@ def stocks():
                     data = data_fetcher.fetch_intraday_data(symbol, time_series, '60min')
                 else:
                     data = data_fetcher.fetch_stock_data(symbol, time_series)
-                
-                if data:   
-                    chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
-                    err = None
-                else:
-                    chart = None
-                    err = "No data available"
-                
+                """Insert API call code"""
+
+                print(data)
+                print("stop")
+
+                err = None
+                chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
+            
             return render_template("stock.html", form=form, template="form-template", err = err, chart = chart)
     
     return render_template("stock.html", form = form, template="form-template")
