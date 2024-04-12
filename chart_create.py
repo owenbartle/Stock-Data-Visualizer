@@ -7,26 +7,16 @@ from datetime import datetime
 
 class ChartMaker():
     
+    @staticmethod
     def convert_date(strDate):
         return datetime.strptime(strDate, '%Y-%m-%d').date()
 
-    def chartMaker(stockData, chartType, symbol, tsChoice, startDate, endDate):
+    @staticmethod
+    def chartMaker(stockData, chartType, symbol, time_series, startDate, endDate):
 
         ## code below is for testing for solving current time series error
-
-        print(stockData)
-        print(stockData)
                 
         if stockData:
-
-            if tsChoice == "1":
-                timeSeries = f"Time Series ({'60min'})"
-            elif tsChoice == "2": 
-                timeSeries = "Time Series (Daily)"
-            elif tsChoice == "3":
-                timeSeries = "Weekly Time Series"
-            elif tsChoice == "4":
-                timeSeries = "Monthly Time Series"
 
             if chartType == "1":
                 barChart = pygal.Bar()
@@ -44,7 +34,7 @@ class ChartMaker():
             lowPrices = []
             closePrices = []
 
-            for date, data in stockData.get(timeSeries, {}).items():
+            for date, data in stockData.get(time_series, {}).items():
                 dates.append(date)
                 openPrices.append(float(data['1. open']))
                 highPrices.append(float(data['2. high']))
@@ -57,6 +47,7 @@ class ChartMaker():
                 barChart.add('High Prices', highPrices)
                 barChart.add('Low Prices', lowPrices)
                 barChart.add('Closing Prices', closePrices)
+                # return barChart
                 barChart.render_in_browser()
             elif chartType == "2":
                 lineChart.x_labels = dates
@@ -64,6 +55,7 @@ class ChartMaker():
                 lineChart.add('High Prices', highPrices)
                 lineChart.add('Low Prices', lowPrices)
                 lineChart.add('Closing Prices', closePrices)
+                # return lineChart
                 lineChart.render_in_browser()
 
 

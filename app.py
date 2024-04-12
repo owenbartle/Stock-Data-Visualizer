@@ -47,7 +47,7 @@ def stocks():
                 print(data)
 
                 err = None
-                chart = chart_maker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
+                chart = ChartMaker.chartMaker(data, chart_type, symbol, time_series, start_date, end_date)
             
             return render_template("stock.html", form=form, template="form-template", err = err, chart = chart)
     
