@@ -9,61 +9,44 @@ class ChartMaker():
     
     @staticmethod
     def convert_date(strDate):
-        return datetime.strptime(strDate, '%Y-%m-%d').date()
+        if isinstance(strDate, str):
+            return datetime.strptime(strDate, '%Y-%m-%d').date()
+        return strDate
 
     @staticmethod
     def chartMaker(stockData, chartType, symbol, time_series, startDate, endDate):
 
-        ## code below is for testing for solving current time series error
-        print(stockData)    
+        startDate = ChartMaker.convert_date(startDate) 
+        endDate = ChartMaker.convert_date(endDate)    
         
         if stockData:
+            chart = pygal.Bar() if chartType == "1" else pygal.Line() if chartType == "2" else None
+            if not chart:
+                raise ValueError("Invalid chart type")
 
-            if chartType == "1":
-                barChart = pygal.Bar()
-                barChart.title = f'Bar Chart for {symbol} between {startDate} and {endDate}'
-            elif chartType == "2":
-                lineChart = pygal.Line()
-                lineChart.title = f'Line Chart for {symbol} between {startDate} and {endDate}'
-            else:
-                print("Chart type invalid.")
-                return
-
-            dates = []
-            openPrices = []
-            highPrices = []
-            lowPrices = []
-            closePrices = []
-
-            filtered_data = {}
-            for date, data in stockData.get(time_series, {}).items():
-                if startDate <= datetime.strptime(date, '%Y-%m-%d').date() <= endDate:
-                    filtered_data[date] = data
-
-            print(filtered_data)
+            chart.title = f'{("Bar" if chartType == "1" else "Line")} Chart for {symbol} between {startDate} and {endDate}'
+            
+            dates, openPrices, highPrices, lowPrices, closePrices = [], [], [], [], []
+            
+            print("Stock Data:", stockData) #print statement to test if data is passed 
 
             for date, data in stockData.get(time_series, {}).items():
-                dates.append(date)
-                openPrices.append(float(data['1. open']))
-                highPrices.append(float(data['2. high']))
-                lowPrices.append(float(data['3. low']))
-                closePrices.append(float(data['4. close']))
+                dateObj = datetime.strptime(date, '%Y-%m-%d').date()
+                print("Processing date:", dateObj) #print statement to see if correct date passed
+                if startDate <= dateObj <= endDate:
+                    dates.append(date)
+                    openPrices.append(float(data['1. open']))
+                    highPrices.append(float(data['2. high']))
+                    lowPrices.append(float(data['3. low']))
+                    closePrices.append(float(data['4. close']))
+                else:
+                    print("Date out of range:", dateObj)
 
-            if chartType == "1":
-                barChart.x_labels = dates
-                barChart.add('Opening Prices', openPrices)
-                barChart.add('High Prices', highPrices)
-                barChart.add('Low Prices', lowPrices)
-                barChart.add('Closing Prices', closePrices)
-                # return barChart
-                barChart.render_in_browser()
-            elif chartType == "2":
-                lineChart.x_labels = dates
-                lineChart.add('Opening Prices', openPrices)
-                lineChart.add('High Prices', highPrices)
-                lineChart.add('Low Prices', lowPrices)
-                lineChart.add('Closing Prices', closePrices)
-                # return lineChart
-                lineChart.render_in_browser()
+            chart.x_labels = dates
+            chart.add('Opening Prices', openPrices)
+            chart.add('High Prices', highPrices)
+            chart.add('Low Prices', lowPrices)
+            chart.add('Closing Prices', closePrices)
+            return chart.render()
 
 

@@ -3,7 +3,7 @@ import requests
 class DataFetching: 
 
     # Add api key
-    api_key = '44S7BTXXJ1HA18RU'
+    api_key = '1Q0EA0DEX9E0PFI6'
 
     # Method for fetching stock data - In Progress
     def fetch_stock_data(self, symbol, tsString):
