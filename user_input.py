@@ -34,10 +34,10 @@ class Stockform(FlaskForm):
 
     #This is where we will implement code to populate the symbol field with stock options
     ##implements tickers array so symbol field can be chosen among the ticker options
-    symbol = SelectField("Choose Stock Symboo", [DataRequired()],
-        tickers
-        
+    symbol = SelectField("Choose Stock Symbol", [DataRequired()],
+        choices=[(ticker, ticker) for ticker in tickers]
     )
+
 
     chart_type = SelectField("Select Chart Type", [DataRequired()],
         choices=[
